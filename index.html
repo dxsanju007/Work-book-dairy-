@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#f7f6f2">
+<title>Days · Work diary</title>
+<style>
+:root{--bg:#f5f4ef;--paper:#fffefa;--ink:#252923;--muted:#858a80;--line:#e8e7df;--accent:#55745e;--soft:#e4ede4;--red:#b65f52}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;transition:background .2s,color .2s}main{max-width:520px;margin:auto;padding:28px 17px 38px}
+.top{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px}.eyebrow{font-size:10px;text-transform:uppercase;letter-spacing:2px;color:var(--muted);font-weight:750}.title{font-size:30px;letter-spacing:-1.3px;font-weight:680;margin:4px 0 0}.title em{font-style:normal;color:var(--accent)}.settingsbtn{height:39px;width:39px;border-radius:14px;border:1px solid var(--line);background:var(--paper);color:var(--ink);font-size:18px}
+.summary{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}.stat{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:15px 16px;min-height:99px}.stat span{display:block;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);font-weight:750}.stat strong{display:block;font-size:23px;letter-spacing:-.7px;margin-top:7px;font-weight:680;overflow-wrap:anywhere}.stat small{font-size:11px;color:var(--muted)}.due{color:var(--red)!important}.settled{color:var(--accent)!important}
+.panel{background:var(--paper);border:1px solid var(--line);border-radius:22px;padding:17px;margin-bottom:12px}.calhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px}.calhead h2{font-size:16px;margin:0;font-weight:700}.arrows{display:flex;gap:6px}.iconbtn{width:34px;height:34px;padding:0;background:var(--bg);color:var(--ink);font-size:21px;border-radius:12px;border:1px solid var(--line)}.week,.calendar{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:5px}.week div{text-align:center;color:var(--muted);font-size:10px;padding:4px 0 8px;font-weight:750}.day{aspect-ratio:1;border:1px solid transparent;border-radius:13px;background:transparent;color:var(--ink);padding:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:3px;font-size:13px;font-weight:600}.day:disabled{opacity:0}.day.today{border-color:#c7cec4}.day.selected{background:var(--ink);color:white}.day.worked:not(.selected){background:var(--soft);color:var(--accent)}.dot{width:5px;height:5px;border-radius:50%;background:currentColor}.day.selected .dot{background:white}.legend{display:flex;align-items:center;gap:7px;color:var(--muted);font-size:11px;margin-top:13px}.legenddot{width:7px;height:7px;border-radius:50%;background:var(--accent)}
+.selectedline{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:14px 1px 0;padding-top:14px;border-top:1px solid var(--line)}.selecteddate{font-size:13px;font-weight:750}.status{font-size:11px;color:var(--muted);margin-top:2px}.markbtn{background:var(--accent);color:white;padding:10px 13px;border-radius:12px;font-size:12px;white-space:nowrap;font-weight:750}.markbtn.remove{background:#f7e8e5;color:var(--red)}
+.entryhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:13px}.entryhead h2{font-size:15px;margin:0;font-weight:750}.entryhead span{font-size:10px;letter-spacing:.7px;text-transform:uppercase;color:var(--muted)}label{display:block;font-size:11px;color:var(--muted);font-weight:750;margin-bottom:6px}input,select{width:100%;border:1px solid var(--line);border-radius:13px;background:var(--paper);padding:12px;font:inherit;outline:none;color:var(--ink);min-width:0}input:focus,select:focus{border-color:var(--accent)}.moneyrow{display:flex;gap:8px}.moneyrow input{min-width:0}.save{background:var(--ink);color:white;padding:0 16px;border-radius:13px;font-weight:750}.hint{font-size:11px;color:var(--muted);margin:9px 0 0}.balancebig{font-size:30px;letter-spacing:-1px;font-weight:750;margin:3px 0}.records h2{font-size:15px;margin:0 0 10px;font-weight:750}.record{display:flex;align-items:center;gap:10px;padding:12px 0;border-top:1px solid var(--line)}.record .rdate{font-size:11px;color:var(--muted);width:61px;flex-shrink:0}.record .rdesc{flex:1;min-width:0;font-size:12px}.record .ramount{font-size:12px;font-weight:750}.record button{background:var(--bg);color:var(--muted);padding:5px 8px;font-size:17px;border-radius:9px}.empty{color:var(--muted);font-size:12px;padding:15px 0;text-align:center}.bottom{display:flex;justify-content:space-between;gap:10px;margin-top:14px}.textbtn{background:none;color:var(--muted);padding:7px 0;font-size:11px;text-decoration:underline;text-underline-offset:3px}.settings.hidden{display:none!important}.settingsgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.settinglabel{font-size:11px;font-weight:750;color:var(--muted);margin-bottom:8px}.swatches{display:flex;gap:8px;flex-wrap:wrap}.swatch{width:27px;height:27px;border-radius:50%;border:2px solid var(--paper);outline:1px solid transparent;padding:0}.swatch.active{outline-color:var(--ink)}.toggleline{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:13px;font-size:12px}.toggleline input{width:18px;height:18px;accent-color:var(--accent)}body[data-theme=dark]{--bg:#171a18;--paper:#222724;--ink:#eff2ec;--muted:#a1aaa0;--line:#353d36;--accent:#a2c5a7;--soft:#2e4032;--red:#f09b8e}body[data-theme=dark] .day.selected{background:#e8eee7;color:#202720}body[data-theme=dark] .save{background:#e8eee7;color:#202720}body.hide-dots .day .dot{display:none!important}body.hide-dots .day.worked:not(.selected){background:transparent;color:var(--ink)}footer{text-align:center;color:var(--muted);font-size:10px;padding:18px 0 4px}@media(min-width:500px){main{padding-top:36px}.panel{padding:20px}.day{font-size:14px}}
+</style>
+</head>
+<body><main>
+<header class="top"><div><div class="eyebrow">YOUR PERSONAL TRACKER</div><h1 class="title">Work diary<em>.</em></h1></div><button class="settingsbtn" id="settingsToggle" aria-label="Customize appearance">☼</button></header>
+<section class="panel settings hidden" id="settingsPanel"><div class="entryhead"><h2>Make it yours</h2><span>APPEARANCE</span></div><div class="settingsgrid"><div><div class="settinglabel">Accent colour</div><div class="swatches"><button class="swatch active" data-accent="#55745e" style="background:#55745e" aria-label="Sage green"></button><button class="swatch" data-accent="#6577a8" style="background:#6577a8" aria-label="Blue"></button><button class="swatch" data-accent="#a36d84" style="background:#a36d84" aria-label="Rose"></button><button class="swatch" data-accent="#b18145" style="background:#b18145" aria-label="Amber"></button></div></div><div><div class="settinglabel">Theme</div><select id="themeSelect"><option value="light">Soft light</option><option value="dark">Dark</option></select></div></div><div class="toggleline"><span>Show workday dots</span><input id="dotsToggle" type="checkbox" checked></div></section>
+<div class="monthtag" id="monthTag" style="display:inline-block;margin:0 0 12px">MONTH</div>
+<section class="summary">
+<div class="stat"><span>Days worked</span><strong id="daysCount">0</strong><small>this month</small></div>
+<div class="stat"><span>Earned</span><strong id="earned">₹0</strong><small>this month</small></div>
+<div class="stat"><span>Paid</span><strong id="paid">₹0</strong><small>this month</small></div>
+<div class="stat"><span>Balance left</span><strong id="balance" class="settled">₹0</strong><small id="balanceCaption">Overall pending</small></div>
+</section>
+<section class="panel">
+<div class="calhead"><h2 id="monthTitle">Month 2026</h2><div class="arrows"><button class="iconbtn" id="prev" aria-label="Previous month">‹</button><button class="iconbtn" id="next" aria-label="Next month">›</button></div></div>
+<div class="week"><div>SU</div><div>MO</div><div>TU</div><div>WE</div><div>TH</div><div>FR</div><div>SA</div></div>
+<div class="calendar" id="calendar"></div>
+<div class="legend"><span class="legenddot"></span><span>Marked as a workday</span></div><div class="selectedline"><div><div class="selecteddate" id="selectedDate">Select a day</div><div class="status" id="selectedStatus">Tap a date to mark work</div></div><button class="markbtn" id="markBtn">＋ Mark worked</button></div>
+</section>
+<section class="panel">
+<div class="entryhead"><h2 id="dayTitle">Selected day's money</h2><span>₹ INR</span></div>
+<div style="margin-bottom:14px"><label for="wageInput">Daily wage earned</label><div class="moneyrow"><input id="wageInput" type="number" min="0" step="0.01" placeholder="e.g. 500"><button class="save" id="saveWage">Save wage</button></div></div>
+<div><label for="paymentInput">Money received on this day</label><div class="moneyrow"><input id="paymentInput" type="number" min="0" step="0.01" placeholder="e.g. 1000"><button class="save" id="savePayment">Save payment</button></div></div>
+<p class="hint">Add the wage you earned and any money you received on the selected date. The balance updates automatically.</p>
+</section>
+<section class="panel">
+<div class="entryhead"><h2>Balance on this day</h2><span id="balanceDateLabel"></span></div>
+<div class="balancebig" id="dayBalance">₹0</div>
+<p class="hint" id="balanceExplain">Total wages earned up to this date, minus payments received up to this date.</p>
+</section>
+<section class="panel records"><h2>Money history this month</h2><div id="moneyList"></div></section>
+<div class="bottom"><button class="textbtn" id="exportBtn">Export backup</button><button class="textbtn" id="importBtn">Import backup</button><button class="textbtn" id="clearBtn">Clear all data</button><input type="file" id="importFile" accept=".json,application/json" hidden></div>
+<footer>Simple days. Clear money. ✳</footer>
+</main>
+<script>
+(()=>{
+const KEY='workDiaryDailyMoney_v3', $=id=>document.getElementById(id);
+const now=new Date(), fmtDate=d=>`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+let month=new Date(now.getFullYear(),now.getMonth(),1), selected=fmtDate(now);
+function read(){try{let x=JSON.parse(localStorage.getItem(KEY)||'{}');return{days:x.days&&typeof x.days==='object'?x.days:{}}}catch{return{days:{}}}}
+let data=read();
+const money=n=>new Intl.NumberFormat('en-IN',{style:'currency',currency:'INR',maximumFractionDigits:2}).format(n||0);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function monthKey(){return fmtDate(month).slice(0,7)}
+function entry(d){return data.days[d]||{worked:false,wage:0,received:0}}
+function balanceThrough(date){return Object.entries(data.days).reduce((s,[d,x])=>d<=date?s+Number(x.wage||0)-Number(x.received||0):s,0)}
+function renderCalendar(){
+ const y=month.getFullYear(),m=month.getMonth(),first=new Date(y,m,1).getDay(),last=new Date(y,m+1,0).getDate();
+ $('monthTitle').textContent=month.toLocaleDateString('en-IN',{month:'long',year:'numeric'});
+ $('monthTag').textContent=month.toLocaleDateString('en-IN',{month:'short',year:'numeric'}).toUpperCase();
+ let out='';for(let i=0;i<first;i++)out+='<button class="day" disabled aria-hidden="true"></button>';
+ for(let n=1;n<=last;n++){let d=`${y}-${String(m+1).padStart(2,'0')}-${String(n).padStart(2,'0')}`,x=entry(d),worked=!!x.worked,today=d===fmtDate(now),sel=d===selected;
+ out+=`<button class="day ${worked?'worked':''} ${today?'today':''} ${sel?'selected':''}" data-date="${d}" aria-label="${d}${worked?', worked':''}" aria-pressed="${sel}"><span>${n}</span>${worked?'<i class="dot"></i>':''}</button>`}
+ $('calendar').innerHTML=out;
+ const dObj=new Date(selected+'T12:00:00'),x=entry(selected),worked=!!x.worked;
+ $('selectedDate').textContent=dObj.toLocaleDateString('en-IN',{weekday:'short',day:'numeric',month:'long'});
+ $('selectedStatus').textContent=worked?'Marked as a workday':'Not marked as worked';
+ $('markBtn').textContent=worked?'✓ Worked':'＋ Mark worked';$('markBtn').classList.toggle('remove',worked);
+ $('wageInput').value=worked?(x.wage??0):'';$('paymentInput').value=worked?(x.received??0):'';
+ $('dayTitle').textContent='Money for '+dObj.toLocaleDateString('en-IN',{day:'numeric',month:'short'});
+ $('balanceDateLabel').textContent=dObj.toLocaleDateString('en-IN',{day:'numeric',month:'short'});
+ const bal=balanceThrough(selected);$('dayBalance').textContent=money(bal);$('dayBalance').className=bal>0?'due':'settled';
+ $('balanceExplain').textContent=bal>0?'This is how much is still owed to you up to this date.':'You have no unpaid balance up to this date.';
+}
+function render(){
+ const key=monthKey(),days=Object.entries(data.days).filter(([d,x])=>d.startsWith(key)&&x.worked);
+ const earned=days.reduce((s,[,x])=>s+Number(x.wage||0),0),paid=Object.entries(data.days).filter(([d])=>d.startsWith(key)).reduce((s,[,x])=>s+Number(x.received||0),0);
+ const allBal=Object.values(data.days).reduce((s,x)=>s+Number(x.wage||0)-Number(x.received||0),0);
+ $('daysCount').textContent=days.length;$('earned').textContent=money(earned);$('paid').textContent=money(paid);
+ $('balance').textContent=money(allBal);$('balance').className=allBal>0?'due':'settled';$('balanceCaption').textContent=allBal>0?'Still owed overall':'All caught up';
+ renderCalendar();
+ const rows=Object.entries(data.days).filter(([d,x])=>d.startsWith(key)&&(Number(x.wage||0)>0||Number(x.received||0)>0||x.worked)).sort((a,b)=>b[0].localeCompare(a[0]));
+ $('moneyList').innerHTML=rows.length?rows.map(([d,x])=>{let label=new Date(d+'T12:00:00').toLocaleDateString('en-IN',{weekday:'short',day:'numeric',month:'short'}),bal=balanceThrough(d);return `<div class="record"><div class="rdate">${esc(label)}</div><div class="rdesc">${x.worked?'Workday':'Money entry'}<div style="font-size:11px;color:var(--muted)">Earned ${money(x.wage||0)} · Received ${money(x.received||0)} · Balance ${money(bal)}</div></div><button data-open="${d}" aria-label="Edit this date">›</button></div>`}).join(''):'<div class="empty">Your work and money entries will show here.</div>';
+}
+$('calendar').addEventListener('click',e=>{const b=e.target.closest('[data-date]');if(!b)return;selected=b.dataset.date;render()});
+$('prev').onclick=()=>{month=new Date(month.getFullYear(),month.getMonth()-1,1);render()};
+$('next').onclick=()=>{month=new Date(month.getFullYear(),month.getMonth()+1,1);render()};
+$('markBtn').onclick=()=>{let x=entry(selected);if(x.worked){if(confirm('Unmark this workday? Your wage and payment entries for this date will also be cleared.'))delete data.days[selected]}else{data.days[selected]={...x,worked:true}}save()};
+$('saveWage').onclick=()=>{const val=$('wageInput').value;if(val===''||!Number.isFinite(Number(val))||Number(val)<0){alert('Enter a valid daily wage.');return}let x=entry(selected);x.worked=true;x.wage=Number(val);data.days[selected]=x;save()};
+$('savePayment').onclick=()=>{const val=$('paymentInput').value;if(val===''||!Number.isFinite(Number(val))||Number(val)<0){alert('Enter a valid payment amount.');return}let x=entry(selected);x.received=Number(val);if(x.wage>0||x.worked||x.received>0)data.days[selected]=x;else delete data.days[selected];save()};
+$('moneyList').addEventListener('click',e=>{const b=e.target.closest('[data-open]');if(b){selected=b.dataset.open;month=new Date(Number(selected.slice(0,4)),Number(selected.slice(5,7))-1,1);render();window.scrollTo({top:0,behavior:'smooth'})}});
+function save(){localStorage.setItem(KEY,JSON.stringify(data));render()}
+$('exportBtn').onclick=()=>{const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='work-diary-backup.json';a.click();URL.revokeObjectURL(url)};
+$('importBtn').onclick=()=>$('importFile').click();
+$('importFile').onchange=async e=>{let f=e.target.files[0];if(!f)return;try{let x=JSON.parse(await f.text());if(!x.days||typeof x.days!=='object')throw 0;if(!confirm('Replace current entries with this backup?'))return;data={days:x.days};save();alert('Backup imported.')}catch{alert('Invalid backup file.')}finally{e.target.value=''}};
+$('clearBtn').onclick=()=>{if(confirm('Delete every workday and money entry? This cannot be undone.')){data={days:{}};save()}};
+$('settingsToggle').onclick=()=>{$('settingsPanel').classList.toggle('hidden')};
+const savedAccent=localStorage.getItem('workDiaryAccent');if(savedAccent){document.documentElement.style.setProperty('--accent',savedAccent);document.documentElement.style.setProperty('--soft',savedAccent+'24');document.querySelectorAll('.swatch').forEach(s=>s.classList.toggle('active',s.dataset.accent===savedAccent))}
+document.querySelectorAll('.swatch').forEach(s=>s.onclick=()=>{const c=s.dataset.accent;localStorage.setItem('workDiaryAccent',c);document.documentElement.style.setProperty('--accent',c);document.documentElement.style.setProperty('--soft',c+'24');document.querySelectorAll('.swatch').forEach(x=>x.classList.toggle('active',x===s))});
+$('themeSelect').value=localStorage.getItem('workDiaryTheme')||'light';document.body.dataset.theme=$('themeSelect').value;
+$('themeSelect').onchange=()=>{document.body.dataset.theme=$('themeSelect').value;localStorage.setItem('workDiaryTheme',$('themeSelect').value)};
+$('dotsToggle').checked=localStorage.getItem('workDiaryDots')!=='off';document.body.classList.toggle('hide-dots',!$('dotsToggle').checked);
+$('dotsToggle').onchange=()=>{document.body.classList.toggle('hide-dots',!$('dotsToggle').checked);localStorage.setItem('workDiaryDots',$('dotsToggle').checked?'on':'off')};
+render();
+})();
+</script></body></html>
